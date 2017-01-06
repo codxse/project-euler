@@ -14,3 +14,10 @@
   (let [denom (gcd x y)]
     (when (not= 0 denom)
       (quot (abs (* x y)) (gcd x y)))))
+
+(defn lazy-fib
+  ([x y]
+   (lazy-seq (cons x (lazy-fib (+' x y) x))))
+  ([]
+   (lazy-fib 1 1)))
+
