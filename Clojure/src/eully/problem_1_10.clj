@@ -23,3 +23,49 @@
   ([] (p2 1 1 0)))
 
 
+;; 11
+;(def p11-data
+;  (->> (slurp "https://projecteuler.net/problem=11")
+;       (re-seq #"\w+")
+;       (filter #(re-seq #"^[0-9]{2}$" %))
+;       (drop 6)
+;       (take 400)
+;       (map #(. Integer parseInt %))))
+;
+;(def p11-data-cols
+;  (loop [coll []
+;         data p11-data]
+;    (if data
+;      (recur (conj coll data) (next data))
+;      coll)))
+;
+;(def p11-single
+;  (->> (map #(partition 1 21 %) p11-data-cols)
+;       (map #(map first %))
+;       (take 20)))
+;
+;(def p11-fhalf-data
+;  (loop [temp []
+;         data (take 20 p11-single)
+;         iter 20]
+;    (if (> iter 0)
+;      (recur (conj temp (take iter (first data)))
+;             (rest data)
+;             (dec iter))
+;      temp)))
+;
+;(def p11-shalf-data
+;  (loop [temp []
+;         data (drop 20 p11-single)
+;         iter 20]))
+;
+;(->> p11-fhalf-data
+;     (map #(partition-all 4 %))
+;     (map #(map (fn [c] (reduce * c)) %))
+;     flatten
+;     (apply max))
+
+
+
+
+
