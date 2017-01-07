@@ -1,6 +1,6 @@
-(ns eully.problem-1-10-test
+(ns eully.problem-1-11-test
   (require [clojure.test :refer :all]
-           [eully.problem-1-10 :refer :all]))
+           [eully.problem-1-11 :refer :all]))
 
 (deftest p1-test
   (testing "Arguments."
@@ -12,3 +12,7 @@
     (is (= 4613732 (p2 1 1 0)))
     (is (= 4613732 (p2 1 1)))
     (is (= 4613732 (p2)))))
+
+(deftest p11-test
+  (testing "Answer"
+    (is (= 70600674 (p11 p11-data)))))
