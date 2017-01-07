@@ -45,7 +45,7 @@
        (flatten)
        (apply max)))
 
-(defn p11-diagonal [data-coll]
+(defn p11-n-to-n--1 [data-coll]
   (loop [coll []
          data data-coll]
     (if data
@@ -53,27 +53,28 @@
       coll)))
 
 (defn p11-half-diagonal
-  [diagonal-data]
-  (let [dat1 (->> (map #(partition 1 21 %) diagonal-data)
-                  (map #(map first %))
-                  (take 20))]
-    (loop [temp []
-           data dat1
-           iter 20]
-      (if (> iter 0)
-        (recur (conj temp (take iter (first data)))
-               (rest data)
-               (dec iter))
-        temp))))
+  [data-n-to-n--1-list]
+  (let [diagonal-data (->> (map #(partition 1 21 %) data-n-to-n--1-list)
+                           (map #(map first %))
+                           (take 20))]
+    (loop [top-half-diagonal-data []
+           data diagonal-data
+           n-line 20]
+      (if data
+        (recur (conj top-half-diagonal-data
+                     (take n-line (first data)))
+               (next data)
+               (dec n-line))
+        top-half-diagonal-data))))
 
 (defn p11 [data]
   (let [horizontal (partition-all 20 data)
-        vertical (->> (partition-all 20 p11-data)
+        vertical (->> horizontal
                       (apply map vector))
-        fhalf-right (-> data p11-diagonal p11-half-diagonal)
-        shalf-right (-> (reverse data) p11-diagonal p11-half-diagonal)
-        fhalf-left (-> (p11-mirror data) p11-diagonal p11-half-diagonal)
-        shalf-left (-> (reverse (p11-mirror data)) p11-diagonal p11-half-diagonal)]
+        fhalf-right (-> data p11-n-to-n--1 p11-half-diagonal)
+        shalf-right (-> (reverse data) p11-n-to-n--1 p11-half-diagonal)
+        fhalf-left (-> (p11-mirror data) p11-n-to-n--1 p11-half-diagonal)
+        shalf-left (-> (reverse (p11-mirror data)) p11-n-to-n--1 p11-half-diagonal)]
     (max (p11-max horizontal)
          (p11-max vertical)
          (p11-max fhalf-right)
