@@ -2,7 +2,7 @@
   (require [clojure.set :as set]
            [eully.common :as c]))
 
-;; 1
+;; problem 1
 (defn p1
   "Return sum of multiple x and y below limit (default 1000).
   x or y must be positive"
@@ -12,7 +12,7 @@
      (reduce + (set/union set1 set2))))
   ([x y] (p1 x y 1000)))
 
-;; 2
+;; problem 2
 (defn p2
   "Return sum of even fibonachi number below 4000000."
   ([x y sum-even]
@@ -22,8 +22,16 @@
   ([x y] (p2 x y 0))
   ([] (p2 1 1 0)))
 
+;; problem 3
+(def p3
+  (memoize
+    (fn [x]
+      "Return largest prime factor."
+      (let [p (int (Math/sqrt x))
+            q (filter c/prime? (range 2 (inc p)))]
+        (apply max (filter #(zero? (rem x %)) q))))))
 
-; 11
+;; problem 11
 (def p11-data
   (->> (slurp "https://projecteuler.net/problem=11")
        (re-seq #"\w+")

@@ -13,6 +13,11 @@
     (is (= 4613732 (p2 1 1)))
     (is (= 4613732 (p2)))))
 
+(deftest p3-test
+  (testing "Answer"
+    (is (= 29 (p3 13195)))
+    (is (= 6857 (p3 600851475143)))))
+
 (deftest p11-test
   (testing "Answer"
     (is (= 70600674 (p11 p11-data)))))
