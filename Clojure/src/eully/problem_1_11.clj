@@ -29,7 +29,7 @@
       "Return largest prime factor."
       (let [p (int (Math/sqrt x))
             q (filter c/prime? (range 2 (inc p)))]
-        (apply max (filter #(zero? (rem x %)) q))))))
+        (apply max 0 (filter #(zero? (rem x %)) q))))))
 
 ;; problem 11
 (def p11-data

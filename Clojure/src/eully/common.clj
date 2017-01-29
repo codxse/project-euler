@@ -28,11 +28,23 @@
       "Return true if prime number."
       (let [x (abs x)]
         (cond
-          (= x 0) false
-          (= x 1) false
-          (= x 2) true
-          (= x 3) true
+          (or (= x 0) (= x 1)) false
+          (some (partial = x) [2 3 5 7 11 13 17]) true
           (even? x) false
           :else (->> (map #(zero? (rem x %))
                           (range 2 (-> x Math/sqrt int inc)))
                      (every? #(= false %))))))))
+
+;(def check-prime
+;  (memoize
+;    (fn [x denom]
+;      (cond
+;        (some (partial = x) [2 3 5 7 11 13 17]) true
+;        (even? x) false
+;        (= 0 (rem x denom)) false
+;        (= denom 2) true
+;        :else (recur x (dec denom))))))
+;
+;(defn prime? [x]
+;  (let [denom (-> x abs Math/sqrt int)]
+;    (check-prime x denom)))
